@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title> 外部网站</title>
+
+  <script type="text/javascript">
+  var aDomain = "http://192.168.6.89:8094";
+  var bDomain = "http://192.168.6.89:8093";
+  
+  
+  // main js function
+  function fMain(funcName,url,callName){
+	//根据funcName 调用不同的方法
+	alert(funcName);
+	if(funcName == "openLayer"){
+		openLayer(url);
+	}else if(funcName == "close"){
+		close(callName);
+	}
+  }
+
+  function openLayer(url){
+	document.getElementById("myframe2").src = url;
+	
+	//window.myframe2.src = url;
+  }
+  function close(funcName){
+	//console.log("close");
+	exec_iframe(funcName);
+  }
+  // exec iframe function
+  //function exec_iframe(){
+	//window.myframe.fIframe();
+  //}
+  
+  // exec iframe function  
+  function exec_iframe(funcName){  
+    if(typeof(exec_obj)=='undefined'){  
+        exec_obj = document.createElement('iframe');  
+        exec_obj.name = 'tmp_frame';  
+        exec_obj.src = bDomain+'/iframe/execB.html?func='+funcName;  
+        exec_obj.style.display = 'none';  
+        document.body.appendChild(exec_obj);  
+    }else{  
+        exec_obj.src = bDomain+'/iframe/execB.html?' + Math.random()+'&func='+funcName;  
+    }  
+  }  
+  </script>
+
+ </head>
+
+ <body>
+  <p>A.html main</p>
+  <p><input type="button" value="exec iframe function" onclick="exec_iframe('test')"></p>
+  <iframe src="" name="myframe" width="500" height="100" id="myframe"></iframe>
+  <p>弹框：</p>
+  <iframe src="" name="myframe2" width="500" height="100" id="myframe2"></iframe>
+<script type="text/javascript">
+document.getElementById("myframe").src = bDomain+'/iframe/b.html';
+</script>
+  
+ </body>
+</html>

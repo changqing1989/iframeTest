@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title> 内嵌页面 </title>
+
+  <script type="text/javascript">
+  var aDomain = "http://192.168.6.89:8094";
+  var bDomain = "http://192.168.6.89:8093";
+  // iframe js function 
+  function fIframe(funcName){
+	alert("触发了C页面的方法，方法名为："+funcName);
+	//alert('iframe function execute success');
+  }
+
+  // exec main function
+  //function exec_main(){
+	//parent.fMain();
+  //}
+  
+  
+  // exec iframe function  
+  function exec_main(){  
+    if(typeof(exec_obj)=='undefined'){  
+        exec_obj = document.createElement('iframe');  
+        exec_obj.name = 'tmp_frame';  
+        exec_obj.src = aDomain+'/iframe/execA.html?func=close&callName=refresh';  
+        exec_obj.style.display = 'none';  
+        document.body.appendChild(exec_obj);  
+    }else{  
+        exec_obj.src = aDomain+'/iframe/execA.html?' + Math.random()+'&func=close&callName=refresh';  
+    }  
+  }
+  </script>
+
+ </head>
+
+ <body>
+  <p>c.html iframe--弹框中的页面</p>
+  <p><input type="button" value="保存" onclick="exec_main()"></p>
+ </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title> iframe window </title>
+
+  <script type="text/javascript">
+  
+	var getUrlParam = function(name){
+        var result= "";
+        var url = window.location.href;
+        if(url.indexOf("?") > -1){
+            var param = url.substring(url.indexOf("?")+1);
+            name+="=";
+            if(param.indexOf(name) > -1){
+                var r = param.substr(param.indexOf(name)+name.length);
+                if(r.indexOf("&")!=-1){
+                    r=r.substring(0,r.indexOf("&"));
+                }
+                result =r;
+            }
+        }
+        return result;
+    };
+	
+	var url = getUrlParam("url");
+	
+	var funcName = getUrlParam("func");
+	
+	var callName = getUrlParam("callName");
+	//console.log(parent.parent);
+	parent.parent.fMain(funcName,url,callName);
+	//parent.parent.fIframe(funcName); // execute main function  
+		
+  </script>
+
+ </head>
+
+ <body>
+  <p>B.html iframe</p>
+  <p><input type="button" value="exec main function" onclick="exec_main()"></p>
+ </body>
+</html>

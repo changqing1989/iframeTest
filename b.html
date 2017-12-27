@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title> 内嵌页面 </title>
+
+  <script type="text/javascript">
+  
+  var aDomain = "http://192.168.6.89:8094";
+  var bDomain = "http://192.168.6.89:8093";
+  // iframe js function 
+  function fIframe(funcName){
+	alert("触发了B页面的方法，方法名为："+funcName);
+	//alert('iframe function execute success');
+	if(funcName == "refresh"){
+		refresh();
+	}
+  }
+  
+  function refresh(){
+	alert("b页面提示："+1);
+  }
+  
+  
+
+  // exec main function
+  //function exec_main(){
+	//parent.fMain();
+  //}
+  
+  
+  // exec iframe function  
+  function exec_main(){  
+    if(typeof(exec_obj)=='undefined'){  
+        exec_obj = document.createElement('iframe');  
+        exec_obj.name = 'tmp_frame';  
+        exec_obj.src = aDomain+'/iframe/execA.html?func=openLayer&url='+bDomain+'/iframe/c.html';  
+        exec_obj.style.display = 'none';  
+        document.body.appendChild(exec_obj);  
+    }else{  
+        exec_obj.src = aDomain+'/iframe/execA.html?' + Math.random()+'&func=openLayer&url='+bDomain+'/iframe/c.html';  
+    }  
+  }
+  </script>
+
+ </head>
+
+ <body>
+  <p>B.html iframe</p>
+  <p><input type="button" value="新增地址" onclick="exec_main()"></p>
+ </body>
+</html>
